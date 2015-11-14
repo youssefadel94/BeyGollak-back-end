@@ -1,0 +1,22 @@
+<div class="header">
+  <div class="container">
+    <img src="http://s3.amazonaws.com/codecademy-content/courses/learn-rails/img/logo-1tm.svg" width="80">
+    <h1>streets</h1>
+  </div>
+</div>
+
+<div class="tags">
+  <div class="container">
+      
+    <div class="cards row">
+    	<% @streets.each do |t| %>
+      <div class="card col-xs-4">
+      
+        <h2><%= t.name %></h2>
+         <p>area loacation : <%= t.area %></p>
+         <%= link_to "Reviews", street_path(t) %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

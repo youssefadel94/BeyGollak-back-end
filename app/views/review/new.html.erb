@@ -1,0 +1,17 @@
+<%= form_for(@review) do |f| %>  
+<!--user--> 
+  <div class="field"> 
+    <%= f.label :content %><br> 
+    <%= f.text_area :review_content %> 
+  </div> 
+  
+
+  
+  <%= f.hidden_field :street_id, :value => @street.id 
+
+  %>
+  <div class="actions"> 
+    <%= f.submit "Create" %> 
+    <%= link_to 'Cancel', streets_path() %>
+  </div> 
+<% end %>

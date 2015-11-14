@@ -1,0 +1,43 @@
+<div class="header">
+  <div class="container">
+     <%= link_to "Back", streets_path() %>
+     
+    <h1>street</h1>
+  </div>
+</div>
+
+<div class="tag">
+  <div class="container">
+      <p id="notice"><%= notice %></p>
+   
+    <h2 class="tag-title"> <%= @street.name %>  </h2>
+
+    <div class="cards row">
+
+	<% @reviews.each do |t| %>
+      <div class="card col-xs-4">
+       <% if t.street_id == @street.id then  %>
+        <h2> user_id : <%= t.user_id %></h2>
+        <p><%= t.review_content %></p>
+     
+        
+         <% if t.user_id == current_user.id then%>
+        <%= link_to 'Delete',review_delete_path(t),  data: { confirm: 'Are you sure?' } %>
+         <% end %>
+      </div>
+      <% end %>
+      <% end %>
+     
+      <!--
+      To do: Loop through destinations and display each one with this HTML
+      <div class="card col-xs-4">
+        destination's image goes here
+        <h2> destination's name goes here </h2>
+        <p> destination's description goes here </p>
+      </div>
+      -->
+
+    </div>
+<%= link_to 'new review', review_new_path(@street) %>
+  </div>
+</div>
