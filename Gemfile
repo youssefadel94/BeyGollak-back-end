@@ -1,6 +1,15 @@
 source 'https://rubygems.org'
-gem 'devise'
 
+
+gem 'devise'
+#gem 'devise_token_auth' # Token based authentication for Rails JSON APIs
+#gem 'omniauth' # required for devise_token_auth
+
+gem 'fb_graph2'
+
+gem 'digest' 
+
+gem 'rabl'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'

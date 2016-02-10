@@ -11,4 +11,26 @@ class Post < ActiveRecord::Base
     has_many :comments
     validates_associated :comments
     validates :post_content, presence: true
+    
+     validate :users_are_friends
+
+         def users_are_friends
+           combinations = ["(user_id = '#{user_id}' AND friend_id = '#{reciever_id}')",
+           "(user_id = '#{reciever_id}' AND friend_id = '#{user_id}')"]
+           if Friendship.where(combinations.join(' OR ')).exists? || user_id == reciever_id then
+               
+           else
+                self.errors.add(:user_id, 'not friends can not post!')
+           end
+         end
+    
+    #adding notification 
+             after_save :notify
+             
+            def notify
+                if user_id != reciever_id then 
+                   Notification.create(user_id: reciever_id ,notification_content: user_id.to_s+" "+"posted on your wall")
+                end
+            end
+         
 end

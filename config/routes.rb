@@ -1,10 +1,53 @@
 Rails.application.routes.draw do
-  devise_for :users
+  
+  namespace :api, defaults: { format: :json } do  
+    resources :user, only: [:index, :create] do
+      member do
+       get :show
+       
+       end 
+    end
+    resources :sessions, only: [:create, :delete]      
+    resources :street, only: :index do
+      member do
+       get :show
+       end 
+    end
+       resources :review, only: [:create, :index]
+       resources :post, only: [:create, :index] do
+          # get :test
+         member do 
+          get :show
+          delete :delete
+         end
+       end
+       resources :comment, only: [:create, :index] do
+          # get :test
+         member do 
+         get :show
+          delete :delete
+         end
+       end
+       resources :notification, only: :index do
+           member do
+           get :seen
+           get :show
+           end
+       end
+       resources :friendship, only: [:index, :create]do
+          # get :test
+         member do 
+          get :show
+          delete :delete
+         end
+       end 
+        end 
+  
   get '' => 'street#index', as: :home
   get '/streets' => 'street#index', as: :streets
   get '/streets/:id' => 'street#show', as: :street
   
-   get 'review/new/:id' =>  'review#new', as: :review_new
+  get 'review/new/:id' =>  'review#new', as: :review_new
   
   post 'review' => 'review#create', as: :reviews 
   
